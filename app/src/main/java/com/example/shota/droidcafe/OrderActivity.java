@@ -1,6 +1,7 @@
 package com.example.shota.droidcafe;
 
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -75,5 +76,19 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public void showDatePicker(View view) {
+        DialogFragment newfragment = new DatePickerFragment();
+        newfragment.show(getSupportFragmentManager(), "datepicker");
+    }
+
+    public void processDatePickerResult(int year, int month, int day) {
+        String year_string = Integer.toString(year);
+        String month_string = Integer.toString(month + 1);
+        String day_string = Integer.toString(day);
+        String dateMassage = month_string + "/" + day_string + "/" + year_string;
+
+        Toast.makeText(getApplicationContext(), getString(R.string.order_date_text) + dateMassage, Toast.LENGTH_SHORT).show();
     }
 }
